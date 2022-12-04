@@ -1,0 +1,60 @@
+.base {
+  background-color: #191C1D;
+  color: #E1E3E3;
+  position: sticky;
+  top: 0;
+  transition: background-color 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  width: 100%;
+
+  &.collapsed {
+    background-color: transparent;
+
+    .header {
+      background-color: rgba(#191C1D, .5);
+      backdrop-filter: blur(1.25rem);
+      padding: 0 1rem;
+    }
+
+    .title {
+      margin-top: -3rem;
+      opacity: 0;
+    }
+  }
+}
+
+.brand {
+  align-items: center;
+  color: #BFC8CA;
+  display: flex;
+  font-family: 'Noto Sans';
+  font-size: 0.875rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  margin-right: auto;
+}
+
+.header {
+  align-items: center;
+  background-color: #191C1D;
+  display: flex;
+  height: 4rem;
+  padding: 0 1rem 0.5rem;
+  position: relative;
+  transition: backdrop-filter 0.5s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.5s cubic-bezier(0.65, 0, 0.35, 1), padding 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  width: 100%;
+  z-index: 1;
+}
+
+.title {
+  align-items: center;
+  background-color: #191C1D;
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 600;
+  height: 3rem;
+  padding: 0 1rem 1.25rem;
+  position: relative;
+  transition: margin 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  width: 100%;
+  z-index: 0;
+}

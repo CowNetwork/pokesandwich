@@ -1,3 +1,5 @@
+import FloatingActionButton from '../components/FloatingActionButton/FloatingActionButton';
+import Navigation from '../components/Navigation/Navigation';
 import './globals.scss';
 
 export default function RootLayout({
@@ -8,7 +10,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body>{children}</body>
+
+      <body>
+        <Navigation />
+
+        {children}
+
+        <FloatingActionButton fixed />
+      </body>
     </html>
   );
 }
