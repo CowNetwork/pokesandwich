@@ -19,20 +19,22 @@ const Navigation = () => {
     }
   });
 
-  return <nav className={cx(styles.base, {
-    [styles.collapsed]: collapsed,
-  })}>
-    <div className={styles.header}>
-      <div className={styles.brand}>
-        <Books size={24} weight="duotone" />
-        <span>PokeSandwi.ch</span>
+  return <>
+    <nav className={cx(styles.base, {
+      [styles.collapsed]: collapsed,
+    })}>
+      <div className={styles.header}>
+        <div className={styles.brand}>
+          <Books size={24} weight="duotone" />
+          <span>PokeSandwi.ch</span>
+        </div>
+
+        <Funnel size={24} weight="duotone" />
       </div>
 
-      <Funnel size={24} weight="duotone" />
-    </div>
-
-    <div className={styles.title}>Alle Rezepte</div>
-  </nav>;
+      <div className={styles.title}>Alle Rezepte</div>
+    </nav>
+  </>;
 };
 
 export default Navigation;
