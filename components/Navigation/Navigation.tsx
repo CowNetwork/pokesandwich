@@ -1,40 +1,45 @@
 "use client";
 
-import cx from "classnames";
-import { Books, Funnel } from "phosphor-react";
-import { useState } from "react";
-import useScroll from "../../hooks/useScroll/useScroll";
-import styles from "./Navigation.module.scss";
+import { Box, Button, Container, HStack, IconButton, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
+import { Books, Funnel, Plus } from "phosphor-react";
 
 const Navigation = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
 
-  useScroll(() => {
-    const { scrollY } = window;
+  return (
+    <Box as="nav" bg="bg-surface" boxShadow={useColorModeValue('sm', 'sm-dark')}>
+      <Container maxW="1440px" py={4}>
+        <HStack spacing={3}>
+          <Box alignItems="center" display="inline-flex" fontFamily="noto" fontSize="0.875rem" fontWeight={500} gap={2} marginRight="auto">
+            <Books size={24} weight="duotone" /> PokéSandwi.ch
+          </Box>
 
-    if (scrollY > 0 && !collapsed) {
-      setCollapsed(true);
-    } else if (scrollY === 0 && collapsed) {
-      setCollapsed(false);
-    }
-  });
+          {isDesktop ? (
+            <Button
+              leftIcon={<Funnel size={18} weight="duotone" />}
+              px={3}
+              variant="ghost"
+            >
+              Filter
+            </Button>
+          ) : (
+            <IconButton
+              variant="ghost"
+              icon={<Funnel size={24} weight="duotone" />}
+              aria-label="Open Menu"
+            />
+          )}
 
-  return <>
-    <nav className={cx(styles.base, {
-      [styles.collapsed]: collapsed,
-    })}>
-      <div className={styles.header}>
-        <div className={styles.brand}>
-          <Books size={24} weight="duotone" />
-          <span>PokeSandwi.ch</span>
-        </div>
-
-        <Funnel size={24} weight="duotone" />
-      </div>
-
-      <div className={styles.title}>Alle Rezepte</div>
-    </nav>
-  </>;
+          <IconButton
+            aria-label="Neues Rezept"
+            colorScheme="cyan"
+            icon={<Plus size={18} weight="bold" />}
+            variant="solid"
+          />
+        </HStack>
+      </Container>
+    </Box>
+  );
 };
 
 export default Navigation;

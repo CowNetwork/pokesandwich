@@ -8,13 +8,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'www.pokewiki.de',
-        port: '',
         pathname: '/images/**',
       },
       {
         protocol: 'https',
         hostname: 'pokewiki.de',
-        port: '',
         pathname: '/images/**',
       },
     ],
