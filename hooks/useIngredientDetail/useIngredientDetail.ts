@@ -10,9 +10,9 @@ const fetchIngredient = async (id: string | undefined) => {
   });
 };
 
-export const useSandwichIngredient = (ingredientId: string | undefined) => {
+export const useIngredientDetail = (ingredientId: string | undefined) => {
   const { data: ingredient } = useSWR(
-    () => `ingredient:${ingredientId ?? ""}`,
+    () => `ingredient-detail:${ingredientId ?? ""}`,
     () => fetchIngredient(ingredientId)
   );
 

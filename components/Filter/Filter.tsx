@@ -22,10 +22,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Funnel } from "phosphor-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useSWR from "swr";
+import { FilterContext } from "../../contexts/Filter/Filter.context";
 import { directus } from "../../data/directus";
-import { useFilter } from "../../hooks/useFilter/useFilter";
 
 const fetchEffectTypes = async () =>
   directus
@@ -49,7 +49,7 @@ export const Filter = () => {
     pokemonType: contextPokemonType,
     reset,
     set,
-  } = useFilter();
+  } = useContext(FilterContext);
 
   const [effectLevel, setEffectLevel] = useState(contextEffectLevel ?? 1);
   const [effectType, setEffectType] = useState(contextEffectType ?? "");

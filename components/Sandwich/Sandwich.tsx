@@ -1,4 +1,5 @@
 import {
+  Badge,
   Card,
   CardBody,
   CardFooter,
@@ -16,8 +17,12 @@ export const Sandwich = ({ sandwich }: SandwichProps) => {
     <Card size="sm">
       <CardHeader>
         <Heading size="md">
-          <chakra.span fontWeight={300}>#S0001</chakra.span> {sandwich.id}
+          <chakra.span fontWeight={300}>
+            #{sandwich.ingameId ?? "XXX"}
+          </chakra.span>{" "}
+          {sandwich.translations[0]?.name}
         </Heading>
+        <Badge>{sandwich.id}</Badge>
       </CardHeader>
 
       <CardBody pt={0}>

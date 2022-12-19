@@ -5,6 +5,7 @@ const initialValue: FilterContextValue = {
   effectLevel: undefined,
   effectType: undefined,
   pokemonType: undefined,
+  hasFilter: false,
   reset: () => void 0,
   set: (_, __, ___) => void 0,
 };
@@ -44,9 +45,14 @@ export const FilterProvider = ({ children }: FilterProviderProps) => {
     effectLevel,
     effectType,
     pokemonType,
+    hasFilter:
+      typeof effectLevel !== "undefined" &&
+      typeof effectType !== "undefined" &&
+      typeof pokemonType !== "undefined",
     reset,
     set,
   };
+
   const { Provider } = FilterContext;
 
   return <Provider value={value}>{children}</Provider>;

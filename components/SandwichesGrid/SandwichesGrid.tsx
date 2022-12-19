@@ -1,16 +1,25 @@
 "use client";
 
 import { SimpleGrid } from "@chakra-ui/react";
+import { useContext } from "react";
 import useSWR from "swr";
+import { FilterContext } from "../../contexts/Filter/Filter.context";
 import { FilterContextValue } from "../../contexts/Filter/types";
 import { directus } from "../../data/directus";
-import { useFilter } from "../../hooks/useFilter/useFilter";
 import { Sandwich } from "../Sandwich/Sandwich";
 
-const fetchSandwiches = (
-  filter: Pick<FilterContextValue, "effectLevel" | "effectType" | "pokemonType">
-) =>
-  directus.items("sandwiches").readByQuery({
+const fetchSandwiches = async (
+  filter:
+    | Pick<FilterContextValue, "effectLevel" | "effectType" | "pokemonType">
+    | undefined
+) => {
+  if (typeof filter === "undefined") {
+    return await directus.items("sandwiches").readByQuery({
+      fields: ["*", "ingredients.*", "translations.*"],
+    });
+  }
+
+  return await directus.items("sandwiches").readByQuery({
     fields: ["*", "ingredients.*", "translations.*"],
     filter: {
       _or: [
@@ -74,12 +83,17 @@ const fetchSandwiches = (
       ],
     },
   });
+};
 
 export const SandwichesGrid = () => {
-  const { effectLevel, effectType, pokemonType } = useFilter();
+  const { effectLevel, effectType, pokemonType, hasFilter } =
+    useContext(FilterContext);
   const { data: sandwiches } = useSWR(
     () => `sandwiches:${effectLevel}${effectType}${pokemonType}`,
-    () => fetchSandwiches({ effectLevel, effectType, pokemonType })
+    () =>
+      fetchSandwiches(
+        hasFilter ? { effectLevel, effectType, pokemonType } : undefined
+      )
   );
 
   return (

@@ -3,6 +3,7 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Navigation from "../components/Navigation/Navigation";
 import { FilterProvider } from "../contexts/Filter/Filter.context";
+import { IngredientDetailProvider } from "../contexts/IngredientDetail/IngredientDetail.context";
 import "./globals.scss";
 
 export default function RootLayout({
@@ -24,11 +25,13 @@ export default function RootLayout({
 
       <body>
         <ChakraProvider theme={theme}>
-          <FilterProvider>
-            <Navigation />
+          <IngredientDetailProvider>
+            <FilterProvider>
+              <Navigation />
 
-            {children}
-          </FilterProvider>
+              {children}
+            </FilterProvider>
+          </IngredientDetailProvider>
         </ChakraProvider>
       </body>
     </html>
