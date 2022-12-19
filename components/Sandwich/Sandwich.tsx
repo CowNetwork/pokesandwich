@@ -5,6 +5,7 @@ import {
   CardHeader,
   chakra,
   Heading,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { SandwichEffect } from "../SandwichEffect/SandwichEffect";
 import { SandwichIngredient } from "../SandwichIngredient/SandwichIngredient";
@@ -19,14 +20,16 @@ export const Sandwich = ({ sandwich }: SandwichProps) => {
         </Heading>
       </CardHeader>
 
-      <CardBody>
-        {sandwich.ingredients.map((ingredient) => (
-          <SandwichIngredient
-            key={ingredient.id}
-            id={ingredient.ingredients_id}
-            quantity={ingredient.quantity}
-          />
-        ))}
+      <CardBody pt={0}>
+        <SimpleGrid gap={2} minChildWidth="5rem">
+          {sandwich.ingredients.map((ingredient) => (
+            <SandwichIngredient
+              key={ingredient.id}
+              id={ingredient.ingredients_id}
+              quantity={ingredient.quantity}
+            />
+          ))}
+        </SimpleGrid>
       </CardBody>
 
       <CardFooter

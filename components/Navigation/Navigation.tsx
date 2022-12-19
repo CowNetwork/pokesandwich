@@ -40,7 +40,7 @@ const Navigation = () => {
             aria-label="Neues Rezept"
             colorScheme="cyan"
             icon={<Plus size={18} weight="bold" />}
-            variant="solid"
+            variant="ghost"
           />
         </HStack>
       </Container>

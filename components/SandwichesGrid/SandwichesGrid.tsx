@@ -12,7 +12,67 @@ const fetchSandwiches = (
 ) =>
   directus.items("sandwiches").readByQuery({
     fields: ["*", "ingredients.*", "translations.*"],
-    filter: {},
+    filter: {
+      _or: [
+        {
+          _and: [
+            {
+              firstEffectLevel: {
+                _eq: filter.effectLevel,
+              },
+            },
+            {
+              firstEffect: {
+                _eq: filter.effectType,
+              },
+            },
+            {
+              firstEffectType: {
+                _eq: filter.pokemonType,
+              },
+            },
+          ],
+        },
+        {
+          _and: [
+            {
+              secondEffectLevel: {
+                _eq: filter.effectLevel,
+              },
+            },
+            {
+              secondEffect: {
+                _eq: filter.effectType,
+              },
+            },
+            {
+              secondEffectType: {
+                _eq: filter.pokemonType,
+              },
+            },
+          ],
+        },
+        {
+          _and: [
+            {
+              thirdEffectLevel: {
+                _eq: filter.effectLevel,
+              },
+            },
+            {
+              thirdEffect: {
+                _eq: filter.effectType,
+              },
+            },
+            {
+              thirdEffectType: {
+                _eq: filter.pokemonType,
+              },
+            },
+          ],
+        },
+      ],
+    },
   });
 
 export const SandwichesGrid = () => {
