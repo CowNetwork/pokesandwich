@@ -1,6 +1,7 @@
 import { Badge, Box, Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import { IngredientDetailContext } from "../../contexts/IngredientDetail/IngredientDetail.context";
+import { translate } from "../../helpers/localization";
 import { useSandwichIngredient } from "../../hooks/useSandwichIngredient/useSandwichIngredient";
 import { SandwichIngredientProps } from "./types";
 
@@ -8,7 +9,12 @@ export const SandwichIngredient = ({
   id,
   quantity,
 }: SandwichIngredientProps) => {
-  const data = useSandwichIngredient(id);
+  const ingredient = useSandwichIngredient(id);
+
+  const ingredientName =
+    ingredient &&
+    translate("de-DE", "languages_id")(ingredient.translations).name;
+
   const { show } = useContext(IngredientDetailContext);
 
   const handleClick = () => {
@@ -25,12 +31,12 @@ export const SandwichIngredient = ({
       onClick={handleClick}
       pos="relative"
     >
-      {data && (
+      {ingredient && (
         <Image
-          alt={data.translations[0].name}
+          alt={ingredientName}
           h="5rem"
-          src={data.imageUrl}
-          title={data.translations[0].name}
+          src={ingredient.imageUrl}
+          title={ingredientName}
         />
       )}
       <Badge

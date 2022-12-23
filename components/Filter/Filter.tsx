@@ -19,6 +19,7 @@ import {
   Select,
   SimpleGrid,
   Text,
+  Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Funnel } from "phosphor-react";
@@ -26,6 +27,8 @@ import { useContext, useState } from "react";
 import useSWR from "swr";
 import { FilterContext } from "../../contexts/Filter/Filter.context";
 import { directus } from "../../data/directus";
+import { translate } from "../../helpers/localization";
+import { EffectType, PokemonType } from "../../types";
 
 const fetchEffectTypes = async () =>
   directus
@@ -111,9 +114,9 @@ export const Filter = () => {
                 value={effectType}
               >
                 {effectTypes?.data &&
-                  effectTypes.data.map((type) => (
+                  effectTypes.data.map((type: EffectType) => (
                     <option key={type.id} value={type.id}>
-                      {type.translations[0].name}
+                      {translate()(type.translations).name}
                     </option>
                   ))}
               </Select>
@@ -136,36 +139,41 @@ export const Filter = () => {
             <FormLabel mt={4}>Pokémontyp</FormLabel>
             {pokemonTypes?.data && (
               <SimpleGrid gap={2} minChildWidth="3.875rem">
-                {pokemonTypes.data.map((type) => (
-                  <Box
-                    alignItems="center"
-                    bgGradient={
-                      pokemonType === type.id
-                        ? "linear(to-br, #F04F30, #AA4488)"
-                        : "linear(to-br, blackAlpha.500, blackAlpha.600)"
-                    }
-                    borderRadius="md"
-                    cursor="pointer"
-                    display="flex"
-                    justifyContent="center"
+                {pokemonTypes.data.map((type: PokemonType) => (
+                  <Tooltip
+                    hasArrow
                     key={type.id}
-                    onClick={() => setPokemonType(type.id)}
-                    sx={{ aspectRatio: "1/1" }}
-                    title={type.translations[0].name}
-                    w="100%"
-                    _hover={{
-                      backgroundImage:
-                        pokemonType !== type.id
-                          ? "linear-gradient(to bottom right, #F04F3080, #AA448880)"
-                          : undefined,
-                    }}
+                    label={translate()(type.translations).name}
+                    placement="top"
                   >
-                    <Image
-                      alt={type.translations[0].name}
-                      h="2rem"
-                      src={type.imageUrl}
-                    />
-                  </Box>
+                    <Box
+                      alignItems="center"
+                      bgGradient={
+                        pokemonType === type.id
+                          ? "linear(to-br, #F04F30, #AA4488)"
+                          : "linear(to-br, blackAlpha.500, blackAlpha.600)"
+                      }
+                      borderRadius="md"
+                      cursor="pointer"
+                      display="flex"
+                      justifyContent="center"
+                      onClick={() => setPokemonType(type.id)}
+                      sx={{ aspectRatio: "1/1" }}
+                      w="100%"
+                      _hover={{
+                        backgroundImage:
+                          pokemonType !== type.id
+                            ? "linear-gradient(to bottom right, #F04F3080, #AA448880)"
+                            : undefined,
+                      }}
+                    >
+                      <Image
+                        alt={translate()(type.translations).name}
+                        h="2rem"
+                        src={type.imageUrl}
+                      />
+                    </Box>
+                  </Tooltip>
                 ))}
               </SimpleGrid>
             )}

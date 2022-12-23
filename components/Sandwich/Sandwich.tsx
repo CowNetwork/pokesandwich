@@ -1,5 +1,4 @@
 import {
-  Badge,
   Card,
   CardBody,
   CardFooter,
@@ -8,6 +7,7 @@ import {
   Heading,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { translate } from "../../helpers/localization";
 import { SandwichEffect } from "../SandwichEffect/SandwichEffect";
 import { SandwichIngredient } from "../SandwichIngredient/SandwichIngredient";
 import { SandwichProps } from "./types";
@@ -17,12 +17,13 @@ export const Sandwich = ({ sandwich }: SandwichProps) => {
     <Card size="sm">
       <CardHeader>
         <Heading size="md">
-          <chakra.span fontWeight={300}>
-            #{sandwich.ingameId ?? "XXX"}
-          </chakra.span>{" "}
-          {sandwich.translations[0]?.name}
+          {sandwich.ingameId && sandwich.ingameId > 0 && (
+            <chakra.span fontWeight={300}>
+              {`#${sandwich.ingameId} `}
+            </chakra.span>
+          )}
+          {translate()(sandwich.translations)?.name ?? "Unbenanntes Sandwich"}
         </Heading>
-        <Badge>{sandwich.id}</Badge>
       </CardHeader>
 
       <CardBody pt={0}>

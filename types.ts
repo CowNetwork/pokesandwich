@@ -16,7 +16,11 @@ export type Ingredient = {
   defaultQuantity: number;
   type: "condiment" | "topping";
   imageUrl: string;
-  sort: number;
+  shoppableAt: {
+    id: string;
+    shop_id: Shop;
+  }[];
+  price: number;
 };
 
 export type PokemonType = {
@@ -26,7 +30,7 @@ export type PokemonType = {
     name: string;
   }[];
   imageUrl: string;
-}
+};
 
 export type Sandwich = {
   id: string;
@@ -49,4 +53,11 @@ export type Sandwich = {
   thirdEffect: string;
   thirdEffectType: string;
   thirdEffectLevel: number;
+};
+
+export type Shop = {
+  translations: {
+    languages_code: string;
+    name: string;
+  }[];
 };
