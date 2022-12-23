@@ -16,6 +16,7 @@ const fetchSandwiches = async (
   if (typeof filter === "undefined") {
     return await directus.items("sandwiches").readByQuery({
       fields: ["*", "ingredients.*", "translations.*"],
+      sort: ["ingameId"],
     });
   }
 
@@ -82,6 +83,7 @@ const fetchSandwiches = async (
         },
       ],
     },
+    sort: ["ingameId"],
   });
 };
 

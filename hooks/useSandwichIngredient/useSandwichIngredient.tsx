@@ -6,7 +6,7 @@ const fetchIngredient = async (id: string | undefined) => {
   if (typeof id === "undefined") return undefined;
 
   return await directus.items("ingredients").readOne(id, {
-    fields: ["id", "imageUrl", "translations.*"],
+    fields: ["defaultQuantity", "id", "imageUrl", "translations.*"],
   });
 };
 

@@ -28,6 +28,7 @@ export const SandwichIngredient = ({
       cursor="pointer"
       display="flex"
       justifyContent="center"
+      minH="5rem"
       onClick={handleClick}
       pos="relative"
     >
@@ -46,7 +47,7 @@ export const SandwichIngredient = ({
         pointerEvents="none"
         pos="absolute"
       >
-        {quantity}×
+        {quantity ?? (ingredient && ingredient.defaultQuantity) ?? "?"}×
       </Badge>
     </Box>
   );
