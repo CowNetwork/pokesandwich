@@ -5,14 +5,14 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci
 
-FROM node:16-apline AS builder
+FROM node:16-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN npm run build
 
-FROM node:16-apline AS runner
+FROM node:16-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
