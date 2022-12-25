@@ -1,16 +1,11 @@
-"use client";
-
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
 import Navigation from "../components/Navigation/Navigation";
 import { FilterProvider } from "../contexts/Filter/Filter.context";
 import { IngredientDetailProvider } from "../contexts/IngredientDetail/IngredientDetail.context";
-import "./globals.scss";
+import "../styles/globals.scss";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function App({ Component, pageProps }: AppProps) {
   const theme = extendTheme({
     fonts: {
       body: "'Quicksand', sans-serif",
@@ -20,20 +15,14 @@ export default function RootLayout({
   });
 
   return (
-    <html lang="en">
-      <head />
+    <ChakraProvider theme={theme}>
+      <IngredientDetailProvider>
+        <FilterProvider>
+          <Navigation />
 
-      <body>
-        <ChakraProvider theme={theme}>
-          <IngredientDetailProvider>
-            <FilterProvider>
-              <Navigation />
-
-              {children}
-            </FilterProvider>
-          </IngredientDetailProvider>
-        </ChakraProvider>
-      </body>
-    </html>
+          <Component {...pageProps} />
+        </FilterProvider>
+      </IngredientDetailProvider>
+    </ChakraProvider>
   );
 }
